@@ -13,6 +13,7 @@ class photband(object):
         self._lowcut  = np.inf
         self._xmagerr = None
         self._ymagerr = None
+        self._Alam_Av = 1.
         
     @property
     def name(self):
@@ -54,5 +55,12 @@ class photband(object):
     def ymagerr(self, new_ymagerr):
         self._ymagerr = new_ymagerr
 
+    @property
+    def Alam_Av(self):
+        return self._Alam_Av
+        
+    @Alam_Av.setter
+    def Alam_Av(self, new_Alam_Av):
+        self._Alam_Av = new_Alam_Av
 
 
