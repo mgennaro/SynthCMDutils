@@ -62,5 +62,3 @@ class photband(object):
     @Alam_Av.setter
     def Alam_Av(self, new_Alam_Av):
         self._Alam_Av = new_Alam_Av
-
-
