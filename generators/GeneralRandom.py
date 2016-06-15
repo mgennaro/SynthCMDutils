@@ -6,7 +6,7 @@ from scipy.integrate import cumtrapz
 
 class GeneralRandom:
   """This class enables us to generate random numbers with an arbitrary 
-  distribution."""
+  distribution. Interpolation between provided samples is linear"""
   
   def __init__(self, x, p, Nrl):
     """Initialize the lookup table (with default values if necessary)
@@ -79,5 +79,4 @@ class GeneralRandom:
     plt.hist(y, bins = 50,
            range = (self.x.min(), self.x.max()), 
            normed = True)
-      #    plt.plot(self.x, self.pdf/self.pdf.max())
-    plt.plot(self.x-(0.5*(self.x[1]-self.x[0])), self.pdf)
+    plt.plot(self.x, self.pdf)
