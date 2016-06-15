@@ -42,7 +42,7 @@ class GeneralRandom:
       if cdf_idx >= Nrl:
         break
     self.delta_inversecdf = np.concatenate((np.diff(self.inversecdf), [0]))
-    self.intp_pdf = interp1d(self.x,self.pdf,fill_value=0.)
+    self.intp_pdf = interp1d(self.x,self.pdf,fill_value=0.,bounds_error=False)
 
   @jit
   def random(self, N = 1):
