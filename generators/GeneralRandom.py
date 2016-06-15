@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numba import jit
 from scipy.interpolate import interp1d
+from scipy.integrate import cumtrapz
 
 class GeneralRandom:
   """This class enables us to generate random numbers with an arbitrary 
@@ -26,7 +27,7 @@ class GeneralRandom:
     
     self.x = x
     self.pdf = p/np.trapz(p,self.x) #normalize it
-    self.cdf = self.pdf.cumsum()
+    self.cdf = cumtrapz(self.pdf,self.x,initial=0.)
     self.inversecdfbins = Nrl
     self.Nrl = Nrl
     y = np.arange(Nrl)/float(Nrl)
@@ -79,4 +80,4 @@ class GeneralRandom:
            range = (self.x.min(), self.x.max()), 
            normed = True)
       #    plt.plot(self.x, self.pdf/self.pdf.max())
-    plt.plot(self.x-(0.5*(self.x[1]-self.x[0])), self.pdf/np.trapz(self.pdf,self.x))
+    plt.plot(self.x-(0.5*(self.x[1]-self.x[0])), self.pdf)
