@@ -57,7 +57,7 @@ class GeneralRandom:
   def getpdf(self, x):
     """Get pdf at position x"""
 
-      return self.intp_pdf(x)
+    return self.intp_pdf(x)
   
   def plot_pdf(self):
     plt.plot(self.x, self.pdf)
