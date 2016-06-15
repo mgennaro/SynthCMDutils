@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from numba import jit
+from scipy.interpolate import interp1d
 
 class GeneralRandom:
   """This class enables us to generate random numbers with an arbitrary 
@@ -24,7 +25,7 @@ class GeneralRandom:
     """
     
     self.x = x
-    self.pdf = p/p.sum() #normalize it
+    self.pdf = p/np.trapz(p,self.x) #normalize it
     self.cdf = self.pdf.cumsum()
     self.inversecdfbins = Nrl
     self.Nrl = Nrl
@@ -40,6 +41,7 @@ class GeneralRandom:
       if cdf_idx >= Nrl:
         break
     self.delta_inversecdf = np.concatenate((np.diff(self.inversecdf), [0]))
+    self.intp_pdf = interp1d(self.x,self.pdf,fill_value=0.)
 
   @jit
   def random(self, N = 1):
@@ -50,6 +52,12 @@ class GeneralRandom:
     y = self.inversecdf[idx] + (idx_f - idx)*self.delta_inversecdf[idx]
 
     return y.T
+
+  @jit
+  def getpdf(self, x):
+    """Get pdf at position x"""
+
+      return self.intp_pdf(x)
   
   def plot_pdf(self):
     plt.plot(self.x, self.pdf)
