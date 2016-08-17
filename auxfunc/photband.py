@@ -14,6 +14,7 @@ class photband(object):
         self._xmagerr = None
         self._ymagerr = None
         self._Alam_Av = 1.
+        self._efflam  = None
         
     @property
     def name(self):
@@ -62,3 +63,11 @@ class photband(object):
     @Alam_Av.setter
     def Alam_Av(self, new_Alam_Av):
         self._Alam_Av = new_Alam_Av
+
+    @property
+    def efflam(self):
+        return self._efflam
+        
+    @efflam.setter
+    def efflam(self, new_efflam):
+        self._efflam = new_efflam
