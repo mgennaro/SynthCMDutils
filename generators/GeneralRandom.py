@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import jit
 from scipy.interpolate import interp1d
 from scipy.integrate import cumtrapz
 
@@ -15,7 +14,7 @@ class GeneralRandom:
     p = probability density profile at that point
     Nrl = number of reverse look up values between 0 and 1"""  
     self.set_pdf(x, p, Nrl)
-  @jit
+
   def set_pdf(self, x, p, Nrl):
     """Generate the lookup tables. 
     x is the value of the random variate
@@ -44,7 +43,6 @@ class GeneralRandom:
     self.delta_inversecdf = np.concatenate((np.diff(self.inversecdf), [0]))
     self.intp_pdf = interp1d(self.x,self.pdf,fill_value=0.,bounds_error=False)
 
-  @jit
   def random(self, N = 1):
     """Give us N random numbers with the requested distribution"""
 
@@ -54,7 +52,6 @@ class GeneralRandom:
 
     return y.T
 
-  @jit
   def getpdf(self, x):
     """Get pdf at position x"""
 
